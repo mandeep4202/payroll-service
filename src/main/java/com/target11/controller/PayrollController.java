@@ -2,7 +2,7 @@ package com.target11.controller;
 
 import com.target11.model.PayrollRecord;
 import com.target11.services.PayrollService;
-import lombok.RequiredArgsConstructor;
+import com.target11.vo.PayrollResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ public class PayrollController {
   }
 
   @PostMapping("/{employeeId}")
-  public ResponseEntity<PayrollRecord> generate(@PathVariable String employeeId) {
+  public ResponseEntity<PayrollResponse> generate(@PathVariable String employeeId) {
     return ResponseEntity.ok(payrollService.generatePayroll(employeeId));
   }
 
