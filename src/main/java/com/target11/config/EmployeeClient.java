@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.cloud.openfeign.FeignClient;
 
-@FeignClient(name = "employee-service", url = "http://localhost:30080")
+@FeignClient(name = "employee-service", url = "http://host.docker.internal:30080")
 public interface EmployeeClient {
     @GetMapping("/api/employees/{id}")
     Employee getEmployeeById(@PathVariable("id") String id);

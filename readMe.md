@@ -34,23 +34,19 @@ docker run -d \
 
 
 4. 📦 Build the Project
-./mvnw clean install
+.  Steps:
+Create a Docker network:
+docker network create payroll-net
 
-or 
+Start MongoDB container:
+docker run --name mongodb-payroll --network payroll-net -p 27018:27018 -e MONGO_INITDB_DATABASE=payrolldb -d mongo:6.0 --port 27018
 
-mvn clean install
+Build your Spring Boot image:
+docker build -t payroll-service:1.0 .
 
-5.Run the Application
+Run your Spring Boot container (connect to MongoDB using the service name):
+docker run --name payroll-service --network payroll-net -p 8083:8083 payroll-service:1.0
 
-./mvnw spring-boot:run
-
-or 
-
-java -jar target/payroll-service-0.0.1-SNAPSHOT.jar
-
-6. Test Using Postman or cURL
-
-
-7.Cleanup Docker 
-docker stop mongo-payroll
-docker rm mongo-payroll
+5.Cleanup Docker 
+docker stop mongodb-payroll
+docker rm mongodb-payroll
