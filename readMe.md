@@ -32,9 +32,8 @@ docker run -d \
   -p 27018:27017 \
   mongo
 
-
-4. 📦 Build and run the Project
+3. 📦 Build and run the Project
 docker compose up
 
-5.Stop the application 
+4.Stop the application 
 docker compose down
