@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  mongodb-payroll:
+    image: mongo:6.0
+    container_name: mongodb-payroll
+    ports:
+      - "27018:27018"
+    environment:
+      - MONGO_INITDB_DATABASE=payrolldb
+    command: ["--port", "27018"]
+
+  payroll-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: payroll-service:latest
+    container_name: payroll-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - mongodb-payroll
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb-payroll:27018/payrolldb
+
+networks:
+  default:
+    name: payroll-net

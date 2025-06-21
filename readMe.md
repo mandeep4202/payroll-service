@@ -32,21 +32,8 @@ docker run -d \
   -p 27018:27017 \
   mongo
 
+3. 📦 Build and run the Project
+docker compose up
 
-4. 📦 Build the Project
-.  Steps:
-Create a Docker network:
-docker network create payroll-net
-
-Start MongoDB container:
-docker run --name mongodb-payroll --network payroll-net -p 27018:27018 -e MONGO_INITDB_DATABASE=payrolldb -d mongo:6.0 --port 27018
-
-Build your Spring Boot image:
-docker build -t payroll-service:1.0 .
-
-Run your Spring Boot container (connect to MongoDB using the service name):
-docker run --name payroll-service --network payroll-net -p 8083:8083 payroll-service:1.0
-
-5.Cleanup Docker 
-docker stop mongodb-payroll
-docker rm mongodb-payroll
+4.Stop the application 
+docker compose down
